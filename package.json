@@ -1,6 +1,6 @@
 {
   "name": "mrcandie-react-rating",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "A react component for star rating system",
   "type": "module",
   "scripts": {

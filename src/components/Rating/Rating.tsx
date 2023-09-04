@@ -1,16 +1,15 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
-export function Rate({
-  count,
+export function Rating({
   rating,
   color,
   onRating,
   readonly = true,
   size,
+  hoverRating,
+  setHoverRating,
 }: any) {
-  const [hoverRating, setHoverRating]: any = useState(0);
-
   const getColor = (index: number) => {
     if (hoverRating >= index) {
       return color.filled;
@@ -21,11 +20,15 @@ export function Rate({
     return color.unfilled;
   };
 
-  const starRating: any = useMemo(() => {
-    return Array(count)
-      .fill(0)
-      .map((_, i) => i + 1)
-      .map((idx: number) => (
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {[1, 1, 1, 1, 1].map((el: any, idx: number) => (
         <AiFillStar
           key={idx}
           size={size ? size : "25px"}
@@ -35,24 +38,12 @@ export function Rate({
           onMouseEnter={() => !readonly && setHoverRating(idx)}
           onMouseLeave={() => !readonly && setHoverRating(0)}
         />
-      ));
-  }, [count, rating, hoverRating]);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {starRating}
+      ))}
     </div>
   );
 }
 
-Rate.defaultProps = {
-  count: 5,
+Rating.defaultProps = {
   rating: 0,
   color: {
     filled: "#f5eb3b",
